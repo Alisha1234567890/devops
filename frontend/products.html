@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Products - MyShop</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <h1 class="logo">🛒 MyShop</h1>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="products">
+    <h2>Our Products</h2>
+    <div class="product-grid">
+      <!-- Product 1 -->
+      <div class="product-card">
+        <img src="images/product1.jpg" alt="Product 1" />
+        <h3>Product One</h3>
+        <p>Short description of Product One.</p>
+        <p class="price">₹499</p>
+        <button onclick="addToCart('Product One', 499)">Add to Cart</button>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="product-card">
+        <img src="images/product2.jpg" alt="Product 2" />
+        <h3>Product Two</h3>
+        <p>Short description of Product Two.</p>
+        <p class="price">₹799</p>
+        <button onclick="addToCart('Product Two', 799)">Add to Cart</button>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="product-card">
+        <img src="images/product3.jpg" alt="Product 3" />
+        <h3>Product Three</h3>
+        <p>Short description of Product Three.</p>
+        <p class="price">₹999</p>
+        <button onclick="addToCart('Product Three', 999)">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Alisha, Archi Pandey & Aditya Walia | MyShop DevOps Project</p>
+  </footer>
+
+  <script>
+    function addToCart(name, price) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push({ name, price });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(name + " added to cart!");
+    }
+  </script>
+</body>
+</html>

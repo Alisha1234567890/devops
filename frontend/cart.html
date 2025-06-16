@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cart - MyShop</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <h1 class="logo">🛒 MyShop</h1>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="cart">
+    <h2>Your Shopping Cart</h2>
+    <div class="cart-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Subtotal</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <tbody id="cart-items">
+          <!-- Items will be dynamically added here -->
+        </tbody>
+      </table>
+      <div class="cart-summary">
+        <h3>Total: ₹<span id="cart-total">0.00</span></h3>
+        <button onclick="updateCart()">Update Cart</button>
+        <button onclick="checkout()">Checkout</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Alisha, Archi Pandey & Aditya Walia | MyShop DevOps Project</p>
+  </footer>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function renderCart() {
+      const cartTable = document.getElementById('cart-items');
+      const totalSpan = document.getElementById('cart-total');
+      cartTable.innerHTML = '';
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        const subtotal = item.price * item.quantity;
+        total += subtotal;
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${item.name}</td>
+          <td><input type="number" min="1" value="${item.quantity}" onchange="changeQty(${index}, this.value)"/></td>
+          <td>₹${item.price.toFixed(2)}</td>
+          <td>₹${subtotal.toFixed(2)}</td>
+          <td><button onclick="removeItem(${index})">❌</button></td>
+        `;
+        cartTable.appendChild(row);
+      });
+
+      totalSpan.textContent = total.toFixed(2);
+    }
+
+    function changeQty(index, newQty) {
+      cart[index].quantity = parseInt(newQty);
+      saveCart();
+      renderCart();
+    }
+
+    function removeItem(index) {
+      cart.splice(index, 1);
+      saveCart();
+      renderCart();
+    }
+
+    function saveCart() {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function updateCart() {
+      alert('Cart updated successfully!');
+      renderCart();
+    }
+
+    function checkout() {
+      alert('Thank you for your purchase!');
+      cart = [];
+      saveCart();
+      renderCart();
+    }
+
+    renderCart();
+  </script>
+</body>
+</html>
