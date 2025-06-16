@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home  </title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <h1 class="logo">DevOps Project</h1>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="home">
+    <div class="hero-content">
+      <h2>Welcome to OUR WEBSITE</h2>
+      <p>This is a showcase of my journey and skills in DevOps and web development. This site is built with Docker, GitHub Actions, and more!</p>
+      <a href="projects.html" class="button">See My Projects</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Alisha ,Archi Pandey and Aditya Walia Devops Project</p>
+  </footer>
+  <!-- Add this inside <body> -->
+<button onclick="getBackendMessage()">Get Backend Message</button>
+<p id="backend-response"></p>
+
+<script>
+  function getBackendMessage() {
+    fetch('/api/message')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('backend-response').innerText = data.message;
+      });
+  }
+</script>
+
+</body>
+</html>
+
